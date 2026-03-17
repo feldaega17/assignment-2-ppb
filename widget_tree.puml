@@ -1,0 +1,189 @@
+@startuml Widget Tree - Assignment 2
+
+title Flutter Widget Tree - My First App
+
+skinparam backgroundColor #FEFEFE
+skinparam defaultFontSize 12
+skinparam shadowing false
+skinparam RoundCorner 10
+
+skinparam object {
+  BackgroundColor<<stateless>> #E3F2FD
+  BorderColor<<stateless>> #1565C0
+  BackgroundColor<<stateful>> #FFF3E0
+  BorderColor<<stateful>> #E65100
+  BackgroundColor<<material>> #E8F5E9
+  BorderColor<<material>> #2E7D32
+  BackgroundColor<<layout>> #F3E5F5
+  BorderColor<<layout>> #6A1B9A
+  BackgroundColor<<display>> #FCE4EC
+  BorderColor<<display>> #AD1457
+}
+
+legend right
+  |= Warna |= Jenis Widget |
+  | <#E3F2FD> | StatelessWidget |
+  | <#FFF3E0> | StatefulWidget |
+  | <#E8F5E9> | Material Widget |
+  | <#F3E5F5> | Layout Widget |
+  | <#FCE4EC> | Display Widget |
+endlegend
+
+object "**MyApp**\n//StatelessWidget//" as MyApp <<stateless>> {
+  root widget aplikasi
+}
+
+object "**MaterialApp**\n//title: 'Flutter Demo'//" as MaterialApp <<material>> {
+  theme: Material3
+  seedColor: deepPurple
+}
+
+object "**RowColumnPage**\n//StatelessWidget//" as RowColumnPage <<stateless>> {
+  home page utama
+}
+
+object "**Scaffold**" as Scaffold <<material>> {
+  struktur halaman
+}
+
+object "**AppBar**\n//backgroundColor: orange[200]//" as AppBar <<material>> {
+  centerTitle: true
+}
+
+object "**Text**\n//'My First App'//" as AppBarText <<display>> {
+  color: black
+}
+
+object "**Column**\n//mainAxis: center//" as BodyColumn <<layout>> {
+  crossAxis: center
+}
+
+' === Image Section ===
+object "**Container**\n//(image wrapper)//" as Container1 <<layout>> {
+}
+
+object "**AspectRatio**\n//ratio: 1.0//" as AspectRatio <<layout>> {
+  menjaga rasio 1:1
+}
+
+object "**Container**\n//color: lightBlue[100]//" as Container1Inner <<layout>> {
+  margin: (20, 5, 20, 10)
+  padding: 20
+}
+
+object "**Center**" as Center1 <<layout>> {
+}
+
+object "**Image.network**\n//'picsum.photos/200'//" as ImageNetwork <<display>> {
+  fit: cover
+  width: 500
+}
+
+' === Text Section ===
+object "**Container**\n//color: pink[200]//" as Container2 <<layout>> {
+  margin: (20, 5, 20, 10)
+  padding: 20
+}
+
+object "**Text**\n//'What image is that'//" as QuestionText <<display>> {
+  fontSize: 16
+}
+
+' === Category Row Section ===
+object "**Container**\n//color: yellow[200]//" as Container3 <<layout>> {
+  margin: (20, 5, 20, 5)
+  padding: 20
+}
+
+object "**Row**\n//mainAxis: spaceEvenly//" as CategoryRow <<layout>> {
+  crossAxis: start
+}
+
+object "**Column**\n//(Food)//" as FoodCol <<layout>> {
+}
+object "**Icon**\n//food_bank//" as FoodIcon <<display>> {
+}
+object "**Text**\n//'Food'//" as FoodText <<display>> {
+}
+
+object "**Column**\n//(Scenery)//" as SceneryCol <<layout>> {
+}
+object "**Icon**\n//landscape//" as SceneryIcon <<display>> {
+}
+object "**Text**\n//'Scenery'//" as SceneryText <<display>> {
+}
+
+object "**Column**\n//(People)//" as PeopleCol <<layout>> {
+}
+object "**Icon**\n//people//" as PeopleIcon <<display>> {
+}
+object "**Text**\n//'People'//" as PeopleText <<display>> {
+}
+
+' === Counter Section ===
+object "**CounterCard**\n//StatefulWidget//" as CounterCard <<stateful>> {
+  state: _counter (int)
+}
+
+object "**Container**\n//color: cyan[100]//" as CounterContainer <<layout>> {
+  margin: (20, 5, 20, 5)
+  padding: 20
+}
+
+object "**Row**\n//mainAxis: spaceBetween//" as CounterRow <<layout>> {
+}
+
+object "**Text**\n//'Counter here: \$_counter'//" as CounterText <<display>> {
+  fontSize: 16
+}
+
+object "**Container**\n//color: cyan[200]//" as ButtonContainer <<layout>> {
+  padding: 5
+}
+
+object "**IconButton**\n//onPressed: _incrementCounter//" as IconButton <<material>> {
+}
+
+object "**Icon**\n//Icons.add//" as AddIcon <<display>> {
+  color: black
+  size: 16
+}
+
+' === Relationships ===
+MyApp --> MaterialApp
+MaterialApp --> RowColumnPage
+RowColumnPage --> Scaffold
+Scaffold --> AppBar
+AppBar --> AppBarText
+Scaffold --> BodyColumn
+
+BodyColumn --> Container1
+Container1 --> AspectRatio
+AspectRatio --> Container1Inner
+Container1Inner --> Center1
+Center1 --> ImageNetwork
+
+BodyColumn --> Container2
+Container2 --> QuestionText
+
+BodyColumn --> Container3
+Container3 --> CategoryRow
+CategoryRow --> FoodCol
+FoodCol --> FoodIcon
+FoodCol --> FoodText
+CategoryRow --> SceneryCol
+SceneryCol --> SceneryIcon
+SceneryCol --> SceneryText
+CategoryRow --> PeopleCol
+PeopleCol --> PeopleIcon
+PeopleCol --> PeopleText
+
+BodyColumn --> CounterCard
+CounterCard --> CounterContainer
+CounterContainer --> CounterRow
+CounterRow --> CounterText
+CounterRow --> ButtonContainer
+ButtonContainer --> IconButton
+IconButton --> AddIcon
+
+@enduml
